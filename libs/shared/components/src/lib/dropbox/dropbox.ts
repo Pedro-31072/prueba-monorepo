@@ -1,11 +1,12 @@
 import { NgClass } from '@angular/common';
-import { Component, ElementRef, input, signal, viewChild } from '@angular/core';
+import { Component, ElementRef, inject, input, signal, viewChild } from '@angular/core';
 type Button = { label: string; action: () => void };
 
 @Component({
   selector: 'lib-dropbox',
   host: {
     '(click)': 'toggleDropBox()',
+    "(document:click)":"onDocumentClick($event)"
   },
   imports: [NgClass],
   template: `
@@ -44,7 +45,14 @@ export class DropboxComponent {
   dropBoxOpen = signal(false);
   dropbox = viewChild<ElementRef<HTMLUListElement>>("dropbox");
   options = input.required<Button[]>();
+  private elementRef = inject(ElementRef);
   toggleDropBox() {
     this.dropBoxOpen.update((expanded) => !expanded);
+  }
+  onDocumentClick(event: MouseEvent) {
+    const clickedInside = this.elementRef.nativeElement.contains(event.target);
+    if (this.dropBoxOpen() && !clickedInside) {
+      this.dropBoxOpen.set(false);
+    }
   }
 }
