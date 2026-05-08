@@ -13,7 +13,21 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "paths": {}
+    "paths": {
+      "@appointment-calendar/ui": ["./libs/domain/appointment/ui/src/index.ts"],
+      "@appointment-calendar/model": [
+        "./libs/domain/appointment/model/src/index.ts"
+      ],
+      "@appointment-calendar/feature": [
+        "./libs/domain/appointment/feature/src/index.ts"
+      ],
+      "@appointment-calendar/data-access": [
+        "./libs/domain/appointment/data-access/src/index.ts"
+      ],
+      "@shared/components": [
+        "./libs/shared/components/src/index.ts"
+      ],
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
