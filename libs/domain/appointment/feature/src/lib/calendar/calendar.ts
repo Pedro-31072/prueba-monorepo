@@ -154,7 +154,7 @@ import { ButtonComponent } from '@shared/components';
     </div>
     @if (showForm()) {
       <appointment-form
-        [currentAppointments]="currentAppointments"
+        [currentAppointments]="facade.currentAppointments"
         (submitAppointment)="onSubmitAppointment($event)"
         [isOpen]="showForm()"
         [appointment]="selectedAppointment()"
@@ -167,7 +167,6 @@ import { ButtonComponent } from '@shared/components';
 })
 export default class CalendarShellComponent {
   facade = inject(SchedulingFacade);
-  currentAppointments = this.facade.currentAppointments;
   viewMode = signal<DateType>(DateType.DAY);
   showForm = signal(false);
   selectedAppointment = signal<Appointment | null>(null);
